@@ -39,4 +39,4 @@ namespace {
 
 
 char MakeDot::ID = 0;
-static RegisterPass<MakeDot> X("MakeDot", "Convert bytecode to dot");
+static RegisterPass<MakeDot> X("makeDot", "Convert bytecode to dot");
