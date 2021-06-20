@@ -47,18 +47,18 @@ namespace {
 
       std::stringstream formatInstruction(Instruction &inst) { 
         std::stringstream fInst;
-        if (!inst.hasName() && !inst.getType()->isVoidTy()) { // if instruction does not have a name and is not void create a name for it
+        if (!inst.hasName() && !inst.getType()->isVoidTy()) { // if instruction does not have a name and is not void creates a name for it
           std::string instName = createInstructionName();
-          inst.setName(instName); // set instruction name so it can be referenced later
+          inst.setName(instName); // sets instruction name so it can be referenced later
         }
 
-        if (!shouldIgnoreInstruction(inst)) {
+        if (!shouldIgnoreInstruction(inst)) { // ignores instructions that don't add meaning to code
           fInst << "\t\t\t";
-          if (inst.hasName()) { // output instruction name if it exists
+          if (inst.hasName()) { // outputs instruction name if it exists
             fInst << inst.getName().str() << " = ";
           }
-          fInst << inst.getOpcodeName(); // output opcode
-          for (unsigned int i = 0; i < inst.getNumOperands(); i++) {	// output instruction's operands
+          fInst << inst.getOpcodeName(); // outputs opcode
+          for (unsigned int i = 0; i < inst.getNumOperands(); i++) {	// outputs instruction's operands
             Value* operand = inst.getOperand(i);
             fInst << formatOperand(operand).str();
           }
@@ -74,13 +74,19 @@ namespace {
       std::stringstream basicBlockToNode(BasicBlock &basic_block) {
         std::string bb_name = basic_block.getName().str(); // gets basic block name as identifier, as it is unique
         std::string original_name = bb_name;
-        sanitizeName(bb_name);
         std::stringstream node;
+        
+        sanitizeName(bb_name);
         node << '\t' << bb_name << "[shape=record,\n\t\tlabel=\"{" << original_name << ":\\l\\l\n";
+        
+        // outputs basic block instructions
         for (Instruction &inst : basic_block) {
           node << formatInstruction(inst).str();
         }
+        
         node << "\t\t}\"\n\t];\n";
+
+        // outputs basic block successors 
         for (BasicBlock *succ : successors(&basic_block)) {
           std::string succ_name = succ->getName().str();
           sanitizeName(succ_name);
@@ -93,12 +99,13 @@ namespace {
       bool runOnModule (Module &module) override {
           for (Function &function: module) {
             if (function.isDeclaration()) { 
-              continue; // if F is an external function being called, skip to the next function
+              continue; // if F is an external function being called, skips to the next function
             }
             std::string file_name = function.getName().str() + ".dot";
             std::ofstream output(file_name);
 
             output << "digraph \"CFG for '" << function.getName().str() << "' function\" {\n";
+            // outputs every basic block
             for (BasicBlock &basic_block: function) {
               output << basicBlockToNode(basic_block).str();
             }
@@ -106,7 +113,7 @@ namespace {
             output.close();
           }
       
-          return false; // always return false as it does not modify the module
+          return false; // always returns false because it does not modify the module
       }
 
   };
