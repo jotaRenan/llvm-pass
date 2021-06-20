@@ -15,10 +15,11 @@ It respects the following requirements:
 3. Rebuild llvm typing make in your build directory
 4. Execute the pass
 
-   `opt -load build/lib/MakeDot.dylib -enable-new-pm=0 -makeDot`
+   `opt -load build/lib/MakeDot.dylib -enable-new-pm=0 -makeDot -disable-output`
 
    - The dylib extension is for shared libraries on MacOS, if you're running on Linux you should use the .so extension
    - The -enable-new-pm=0 flag disables the new pass manager from LLVM and is necessary to run the pass if you're running the newest distribution of LLVM
+   - The -disable-output is used to avoid printing the binaries
 
 ## Authors
 
