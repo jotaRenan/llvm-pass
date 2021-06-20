@@ -12,14 +12,14 @@ It respects the following requirements:
 ~~just walk but faster lol~~
 1. Unpack this directory into /llvm/lib/Transforms
 2. Edit the file CMakeLists.txt to add `add_subdirectory(llvm-pass)`
-3. Rebuild llvm typing make in your build directory
+3. Rebuild LLVM by executing `make` in the `/build` directory
 4. Execute the pass
 
-   `opt -load build/lib/MakeDot.dylib -enable-new-pm=0 -makeDot -disable-output`
+   `opt -load build/lib/MakeDot.<so | dylib> -enable-new-pm=0 -makeDot -disable-output`
 
-   - The dylib extension is for shared libraries on MacOS, if you're running on Linux you should use the .so extension
-   - The -enable-new-pm=0 flag disables the new pass manager from LLVM and is necessary to run the pass if you're running the newest distribution of LLVM
-   - The -disable-output is used to avoid printing the binaries
+   - The .dylib extension is for shared libraries on MacOS. If you're running on Linux you should use the .so extension
+   - The `-enable-new-pm=0` flag disables the new Pass Manager from LLVM and is necessary to run the pass if you're running the newest distribution of LLVM
+   - The -disable-output is used to avoid printing the binary outputs to the terminal
 
 ## Authors
 
