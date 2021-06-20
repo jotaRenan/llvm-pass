@@ -21,27 +21,31 @@ namespace {
 
       void createEdges() {}
 
-      void BBtoNode(BasicBlock &BB) {
-        std::string bb_name = BB.getName().str(); // gets basic block name as identifier, as it is unique
-        std::stringstream node;
-        node << bb_name << "[shape=record,label=\"{" << bb_name << ":\\l\\l\n";
-        for (const Instruction &inst : BB ) {
-          node << "\\l\n";
-        }
-        node << "}\"];";
+      void formatInstruction(Instruction &inst) { 
       }
 
-      bool runOnModule (Module &M) override {
+      std::stringstream basicBlockToNode(BasicBlock &basic_block) {
+        std::string bb_name = basic_block.getName().str(); // gets basic block name as identifier, as it is unique
+        std::stringstream node;
+        node << bb_name << "[shape=record,label=\"{" << bb_name << ":\\l\\l\n";
+        for (const Instruction &inst : basic_block ) {
+          node << "\\l";
+        }
+        node << "}\"];\n";
+        return node;
+      }
+
+      bool runOnModule (Module &module) override {
           std::string file_name = "teste.dot";
           std::ofstream output(file_name);
-          for (Function &F: M) {
-            if (F.isDeclaration()) { 
+          for (Function &function: module) {
+            if (function.isDeclaration()) { 
               continue; // if F is an external function being called, skip to the next function
             }
 
-            output << "digraph \"CFG for '" << F.getName().str() << "' function\" {\n";
-            for (BasicBlock &BB: F) {
-              output << BB.getName().str() << "\n";
+            output << "digraph \"CFG for '" << function.getName().str() << "' function\" {\n";
+            for (BasicBlock &basic_block: function) {
+              output << basicBlockToNode(basic_block).rdbuf();
               
             }
             output << "}\n";
