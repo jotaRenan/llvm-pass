@@ -9,7 +9,7 @@ It respects the following requirements:
 - Type information should not be printed
 
 ## How to run
-
+~~just walk but faster lol~~
 1. Unpack this directory into /llvm/lib/Transforms
 2. Edit the file CMakeLists.txt to add `add_subdirectory(llvm-pass)`
 3. Rebuild llvm typing make in your build directory
