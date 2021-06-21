@@ -1,0 +1,115 @@
+digraph "CFG for 'Doit' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			br while.cond \l
+		}"
+	];
+	entry -> whilecond;
+	whilecond[shape=record,
+		label="{while.cond:\l\l
+			%49 = load i \l
+			cmp = icmp %49 16 \l
+			br cmp while.end while.body \l
+		}"
+	];
+	whilecond -> whilebody;
+	whilecond -> whileend;
+	whilebody[shape=record,
+		label="{while.body:\l\l
+			%50 = load i \l
+			cmp1 = icmp %50 1 \l
+			br cmp1 if.end land.lhs.true \l
+		}"
+	];
+	whilebody -> landlhstrue;
+	whilebody -> ifend;
+	landlhstrue[shape=record,
+		label="{land.lhs.true:\l\l
+			%51 = load i \l
+			cmp2 = icmp %51 8 \l
+			br cmp2 if.end if.then \l
+		}"
+	];
+	landlhstrue -> ifthen;
+	landlhstrue -> ifend;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%52 = load i \l
+			idxprom = sext %52 \l
+			arrayidx = getelementptr a 0 idxprom \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			%53 = load i \l
+			cmp3 = icmp %53 2 \l
+			br cmp3 if.end7 if.then4 \l
+		}"
+	];
+	ifend -> ifthen4;
+	ifend -> ifend7;
+	ifthen4[shape=record,
+		label="{if.then4:\l\l
+			%54 = load i \l
+			idxprom5 = sext %54 \l
+			arrayidx6 = getelementptr b 0 idxprom5 \l
+			br if.end7 \l
+		}"
+	];
+	ifthen4 -> ifend7;
+	ifend7[shape=record,
+		label="{if.end7:\l\l
+			%55 = load i \l
+			cmp8 = icmp %55 7 \l
+			br cmp8 if.end12 if.then9 \l
+		}"
+	];
+	ifend7 -> ifthen9;
+	ifend7 -> ifend12;
+	ifthen9[shape=record,
+		label="{if.then9:\l\l
+			%56 = load i \l
+			add = add %56 7 \l
+			idxprom10 = sext add \l
+			arrayidx11 = getelementptr c 0 idxprom10 \l
+			br if.end12 \l
+		}"
+	];
+	ifthen9 -> ifend12;
+	ifend12[shape=record,
+		label="{if.end12:\l\l
+			%57 = load i \l
+			add13 = add %57 1 \l
+			br while.cond \l
+		}"
+	];
+	ifend12 -> whilecond;
+	whileend[shape=record,
+		label="{while.end:\l\l
+			arraydecay = getelementptr b 0 0 \l
+			arraydecay14 = getelementptr a 0 0 \l
+			arraydecay15 = getelementptr c 0 0 \l
+			arraydecay16 = getelementptr x 0 0 \l
+			call 1 q arraydecay arraydecay14 arraydecay15 arraydecay16 Try \l
+			%58 = load q \l
+			tobool = icmp %58 0 \l
+			br tobool if.then17 if.end18 \l
+		}"
+	];
+	whileend -> ifend18;
+	whileend -> ifthen17;
+	ifthen17[shape=record,
+		label="{if.then17:\l\l
+			call = call printf \l
+			br if.end18 \l
+		}"
+	];
+	ifthen17 -> ifend18;
+	ifend18[shape=record,
+		label="{if.end18:\l\l
+			ret \l
+		}"
+	];
+}

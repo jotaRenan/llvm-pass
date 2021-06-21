@@ -1,0 +1,142 @@
+digraph "CFG for 'Checktree' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%46 = load p.addr \l
+			left = getelementptr %46 0 0 \l
+			%47 = load left \l
+			cmp = icmp %47 \l
+			br cmp if.end7 if.then \l
+		}"
+	];
+	entry -> ifthen;
+	entry -> ifend7;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%48 = load p.addr \l
+			left1 = getelementptr %48 0 0 \l
+			%49 = load left1 \l
+			val = getelementptr %49 0 2 \l
+			%50 = load val \l
+			%51 = load p.addr \l
+			val2 = getelementptr %51 0 2 \l
+			%52 = load val2 \l
+			cmp3 = icmp %50 %52 \l
+			br cmp3 if.else if.then4 \l
+		}"
+	];
+	ifthen -> ifthen4;
+	ifthen -> ifelse;
+	ifthen4[shape=record,
+		label="{if.then4:\l\l
+			br if.end \l
+		}"
+	];
+	ifthen4 -> ifend;
+	ifelse[shape=record,
+		label="{if.else:\l\l
+			%53 = load p.addr \l
+			left5 = getelementptr %53 0 0 \l
+			%54 = load left5 \l
+			call = call %54 Checktree \l
+			tobool = icmp call 0 \l
+			br tobool land.end land.rhs \l
+		}"
+	];
+	ifelse -> landrhs;
+	ifelse -> landend;
+	landrhs[shape=record,
+		label="{land.rhs:\l\l
+			%55 = load result \l
+			tobool6 = icmp %55 0 \l
+			br land.end \l
+		}"
+	];
+	landrhs -> landend;
+	landend[shape=record,
+		label="{land.end:\l\l
+			%56 = phi 0 tobool6 \l
+			land.ext = zext %56 \l
+			br if.end \l
+		}"
+	];
+	landend -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br if.end7 \l
+		}"
+	];
+	ifend -> ifend7;
+	ifend7[shape=record,
+		label="{if.end7:\l\l
+			%57 = load p.addr \l
+			right = getelementptr %57 0 1 \l
+			%58 = load right \l
+			cmp8 = icmp %58 \l
+			br cmp8 if.end24 if.then9 \l
+		}"
+	];
+	ifend7 -> ifthen9;
+	ifend7 -> ifend24;
+	ifthen9[shape=record,
+		label="{if.then9:\l\l
+			%59 = load p.addr \l
+			right10 = getelementptr %59 0 1 \l
+			%60 = load right10 \l
+			val11 = getelementptr %60 0 2 \l
+			%61 = load val11 \l
+			%62 = load p.addr \l
+			val12 = getelementptr %62 0 2 \l
+			%63 = load val12 \l
+			cmp13 = icmp %61 %63 \l
+			br cmp13 if.else15 if.then14 \l
+		}"
+	];
+	ifthen9 -> ifthen14;
+	ifthen9 -> ifelse15;
+	ifthen14[shape=record,
+		label="{if.then14:\l\l
+			br if.end23 \l
+		}"
+	];
+	ifthen14 -> ifend23;
+	ifelse15[shape=record,
+		label="{if.else15:\l\l
+			%64 = load p.addr \l
+			right16 = getelementptr %64 0 1 \l
+			%65 = load right16 \l
+			call17 = call %65 Checktree \l
+			tobool18 = icmp call17 0 \l
+			br tobool18 land.end21 land.rhs19 \l
+		}"
+	];
+	ifelse15 -> landrhs19;
+	ifelse15 -> landend21;
+	landrhs19[shape=record,
+		label="{land.rhs19:\l\l
+			%66 = load result \l
+			tobool20 = icmp %66 0 \l
+			br land.end21 \l
+		}"
+	];
+	landrhs19 -> landend21;
+	landend21[shape=record,
+		label="{land.end21:\l\l
+			%67 = phi 0 tobool20 \l
+			land.ext22 = zext %67 \l
+			br if.end23 \l
+		}"
+	];
+	landend21 -> ifend23;
+	ifend23[shape=record,
+		label="{if.end23:\l\l
+			br if.end24 \l
+		}"
+	];
+	ifend23 -> ifend24;
+	ifend24[shape=record,
+		label="{if.end24:\l\l
+			%68 = load result \l
+			ret %68 \l
+		}"
+	];
+}

@@ -1,0 +1,41 @@
+digraph "CFG for 'Initialize' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%9 = load i \l
+			cmp = icmp %9 7 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%10 = load i \l
+			sub = sub %10 1 \l
+			%11 = load i \l
+			idxprom = sext %11 \l
+			arrayidx = getelementptr permarray 0 idxprom \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%12 = load i \l
+			inc = add %12 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			ret \l
+		}"
+	];
+}

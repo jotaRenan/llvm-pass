@@ -1,0 +1,38 @@
+digraph "CFG for 'main' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%82 = load i \l
+			cmp = icmp %82 100 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%83 = load i \l
+			call %83 Trees \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%84 = load i \l
+			inc = add %84 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			ret 0 \l
+		}"
+	];
+}

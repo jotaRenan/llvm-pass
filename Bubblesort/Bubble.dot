@@ -1,0 +1,128 @@
+digraph "CFG for 'Bubble' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			call bInitarr \l
+			br while.cond \l
+		}"
+	];
+	entry -> whilecond;
+	whilecond[shape=record,
+		label="{while.cond:\l\l
+			%17 = load top \l
+			cmp = icmp %17 1 \l
+			br cmp while.end18 while.body \l
+		}"
+	];
+	whilecond -> whilebody;
+	whilecond -> whileend18;
+	whilebody[shape=record,
+		label="{while.body:\l\l
+			br while.cond1 \l
+		}"
+	];
+	whilebody -> whilecond1;
+	whilecond1[shape=record,
+		label="{while.cond1:\l\l
+			%18 = load i \l
+			%19 = load top \l
+			cmp2 = icmp %18 %19 \l
+			br cmp2 while.end while.body3 \l
+		}"
+	];
+	whilecond1 -> whilebody3;
+	whilecond1 -> whileend;
+	whilebody3[shape=record,
+		label="{while.body3:\l\l
+			%20 = load i \l
+			idxprom = sext %20 \l
+			arrayidx = getelementptr sortlist 0 idxprom \l
+			%21 = load arrayidx \l
+			%22 = load i \l
+			add = add %22 1 \l
+			idxprom4 = sext add \l
+			arrayidx5 = getelementptr sortlist 0 idxprom4 \l
+			%23 = load arrayidx5 \l
+			cmp6 = icmp %21 %23 \l
+			br cmp6 if.end if.then \l
+		}"
+	];
+	whilebody3 -> ifthen;
+	whilebody3 -> ifend;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%24 = load i \l
+			idxprom7 = sext %24 \l
+			arrayidx8 = getelementptr sortlist 0 idxprom7 \l
+			%25 = load arrayidx8 \l
+			%26 = load i \l
+			add9 = add %26 1 \l
+			idxprom10 = sext add9 \l
+			arrayidx11 = getelementptr sortlist 0 idxprom10 \l
+			%27 = load arrayidx11 \l
+			%28 = load i \l
+			idxprom12 = sext %28 \l
+			arrayidx13 = getelementptr sortlist 0 idxprom12 \l
+			%29 = load j \l
+			%30 = load i \l
+			add14 = add %30 1 \l
+			idxprom15 = sext add14 \l
+			arrayidx16 = getelementptr sortlist 0 idxprom15 \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			%31 = load i \l
+			add17 = add %31 1 \l
+			br while.cond1 \l
+		}"
+	];
+	ifend -> whilecond1;
+	whileend[shape=record,
+		label="{while.end:\l\l
+			%32 = load top \l
+			sub = sub %32 1 \l
+			br while.cond \l
+		}"
+	];
+	whileend -> whilecond;
+	whileend18[shape=record,
+		label="{while.end18:\l\l
+			%33 = load \l
+			%34 = load littlest \l
+			cmp19 = icmp %33 %34 \l
+			br cmp19 lor.lhs.false if.then21 \l
+		}"
+	];
+	whileend18 -> ifthen21;
+	whileend18 -> lorlhsfalse;
+	lorlhsfalse[shape=record,
+		label="{lor.lhs.false:\l\l
+			%35 = load \l
+			%36 = load biggest \l
+			cmp20 = icmp %35 %36 \l
+			br cmp20 if.end22 if.then21 \l
+		}"
+	];
+	lorlhsfalse -> ifthen21;
+	lorlhsfalse -> ifend22;
+	ifthen21[shape=record,
+		label="{if.then21:\l\l
+			call = call printf \l
+			br if.end22 \l
+		}"
+	];
+	ifthen21 -> ifend22;
+	ifend22[shape=record,
+		label="{if.end22:\l\l
+			%37 = load run.addr \l
+			add23 = add %37 1 \l
+			idxprom24 = sext add23 \l
+			arrayidx25 = getelementptr sortlist 0 idxprom24 \l
+			%38 = load arrayidx25 \l
+			call26 = call %38 printf \l
+			ret \l
+		}"
+	];
+}

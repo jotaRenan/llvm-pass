@@ -1,0 +1,184 @@
+digraph "CFG for 'Try' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%2 = load q.addr \l
+			br while.cond \l
+		}"
+	];
+	entry -> whilecond;
+	whilecond[shape=record,
+		label="{while.cond:\l\l
+			%3 = load q.addr \l
+			%4 = load %3 \l
+			tobool = icmp %4 0 \l
+			br tobool land.rhs land.end \l
+		}"
+	];
+	whilecond -> landend;
+	whilecond -> landrhs;
+	landrhs[shape=record,
+		label="{land.rhs:\l\l
+			%5 = load j \l
+			cmp = icmp %5 8 \l
+			br land.end \l
+		}"
+	];
+	landrhs -> landend;
+	landend[shape=record,
+		label="{land.end:\l\l
+			%6 = phi 0 cmp \l
+			br %6 while.end while.body \l
+		}"
+	];
+	landend -> whilebody;
+	landend -> whileend;
+	whilebody[shape=record,
+		label="{while.body:\l\l
+			%7 = load j \l
+			add = add %7 1 \l
+			%8 = load q.addr \l
+			%9 = load b.addr \l
+			%10 = load j \l
+			idxprom = sext %10 \l
+			arrayidx = getelementptr %9 idxprom \l
+			%11 = load arrayidx \l
+			tobool1 = icmp %11 0 \l
+			br tobool1 if.end37 land.lhs.true \l
+		}"
+	];
+	whilebody -> landlhstrue;
+	whilebody -> ifend37;
+	landlhstrue[shape=record,
+		label="{land.lhs.true:\l\l
+			%12 = load a.addr \l
+			%13 = load i.addr \l
+			%14 = load j \l
+			add2 = add %13 %14 \l
+			idxprom3 = sext add2 \l
+			arrayidx4 = getelementptr %12 idxprom3 \l
+			%15 = load arrayidx4 \l
+			tobool5 = icmp %15 0 \l
+			br tobool5 if.end37 land.lhs.true6 \l
+		}"
+	];
+	landlhstrue -> landlhstrue6;
+	landlhstrue -> ifend37;
+	landlhstrue6[shape=record,
+		label="{land.lhs.true6:\l\l
+			%16 = load c.addr \l
+			%17 = load i.addr \l
+			%18 = load j \l
+			sub = sub %17 %18 \l
+			add7 = add sub 7 \l
+			idxprom8 = sext add7 \l
+			arrayidx9 = getelementptr %16 idxprom8 \l
+			%19 = load arrayidx9 \l
+			tobool10 = icmp %19 0 \l
+			br tobool10 if.end37 if.then \l
+		}"
+	];
+	landlhstrue6 -> ifthen;
+	landlhstrue6 -> ifend37;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%20 = load j \l
+			%21 = load x.addr \l
+			%22 = load i.addr \l
+			idxprom11 = sext %22 \l
+			arrayidx12 = getelementptr %21 idxprom11 \l
+			%23 = load b.addr \l
+			%24 = load j \l
+			idxprom13 = sext %24 \l
+			arrayidx14 = getelementptr %23 idxprom13 \l
+			%25 = load a.addr \l
+			%26 = load i.addr \l
+			%27 = load j \l
+			add15 = add %26 %27 \l
+			idxprom16 = sext add15 \l
+			arrayidx17 = getelementptr %25 idxprom16 \l
+			%28 = load c.addr \l
+			%29 = load i.addr \l
+			%30 = load j \l
+			sub18 = sub %29 %30 \l
+			add19 = add sub18 7 \l
+			idxprom20 = sext add19 \l
+			arrayidx21 = getelementptr %28 idxprom20 \l
+			%31 = load i.addr \l
+			cmp22 = icmp %31 8 \l
+			br cmp22 if.else if.then23 \l
+		}"
+	];
+	ifthen -> ifthen23;
+	ifthen -> ifelse;
+	ifthen23[shape=record,
+		label="{if.then23:\l\l
+			%32 = load i.addr \l
+			add24 = add %32 1 \l
+			%33 = load q.addr \l
+			%34 = load a.addr \l
+			%35 = load b.addr \l
+			%36 = load c.addr \l
+			%37 = load x.addr \l
+			call add24 %33 %34 %35 %36 %37 Try \l
+			%38 = load q.addr \l
+			%39 = load %38 \l
+			tobool25 = icmp %39 0 \l
+			br tobool25 if.then26 if.end \l
+		}"
+	];
+	ifthen23 -> ifend;
+	ifthen23 -> ifthen26;
+	ifthen26[shape=record,
+		label="{if.then26:\l\l
+			%40 = load b.addr \l
+			%41 = load j \l
+			idxprom27 = sext %41 \l
+			arrayidx28 = getelementptr %40 idxprom27 \l
+			%42 = load a.addr \l
+			%43 = load i.addr \l
+			%44 = load j \l
+			add29 = add %43 %44 \l
+			idxprom30 = sext add29 \l
+			arrayidx31 = getelementptr %42 idxprom30 \l
+			%45 = load c.addr \l
+			%46 = load i.addr \l
+			%47 = load j \l
+			sub32 = sub %46 %47 \l
+			add33 = add sub32 7 \l
+			idxprom34 = sext add33 \l
+			arrayidx35 = getelementptr %45 idxprom34 \l
+			br if.end \l
+		}"
+	];
+	ifthen26 -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br if.end36 \l
+		}"
+	];
+	ifend -> ifend36;
+	ifelse[shape=record,
+		label="{if.else:\l\l
+			%48 = load q.addr \l
+			br if.end36 \l
+		}"
+	];
+	ifelse -> ifend36;
+	ifend36[shape=record,
+		label="{if.end36:\l\l
+			br if.end37 \l
+		}"
+	];
+	ifend36 -> ifend37;
+	ifend37[shape=record,
+		label="{if.end37:\l\l
+			br while.cond \l
+		}"
+	];
+	ifend37 -> whilecond;
+	whileend[shape=record,
+		label="{while.end:\l\l
+			ret \l
+		}"
+	];
+}

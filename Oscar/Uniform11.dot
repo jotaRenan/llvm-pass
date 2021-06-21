@@ -1,0 +1,18 @@
+digraph "CFG for 'Uniform11' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%42 = load iy.addr \l
+			%43 = load %42 \l
+			mul = mul 4855 %43 \l
+			add = add mul 1731 \l
+			and = and add 8191 \l
+			%44 = load iy.addr \l
+			%45 = load iy.addr \l
+			%46 = load %45 \l
+			conv = sitofp %46 \l
+			div = fdiv conv \l
+			%47 = load yfl.addr \l
+			ret \l
+		}"
+	];
+}

@@ -1,0 +1,40 @@
+digraph "CFG for 'Queens' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%59 = load i \l
+			cmp = icmp %59 50 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			call Doit \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%60 = load i \l
+			inc = add %60 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			%61 = load run.addr \l
+			add = add %61 1 \l
+			call = call add printf \l
+			ret \l
+		}"
+	];
+}

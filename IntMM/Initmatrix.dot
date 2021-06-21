@@ -1,0 +1,79 @@
+digraph "CFG for 'Initmatrix' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%2 = load i \l
+			cmp = icmp %2 40 \l
+			br cmp for.end9 for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend9;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			br for.cond1 \l
+		}"
+	];
+	forbody -> forcond1;
+	forcond1[shape=record,
+		label="{for.cond1:\l\l
+			%3 = load j \l
+			cmp2 = icmp %3 40 \l
+			br cmp2 for.end for.body3 \l
+		}"
+	];
+	forcond1 -> forbody3;
+	forcond1 -> forend;
+	forbody3[shape=record,
+		label="{for.body3:\l\l
+			call = call Rand \l
+			%4 = load temp \l
+			%5 = load temp \l
+			div = sdiv %5 120 \l
+			mul = mul div 120 \l
+			sub = sub %4 mul \l
+			sub4 = sub sub 60 \l
+			%6 = load m.addr \l
+			%7 = load i \l
+			idxprom = sext %7 \l
+			arrayidx = getelementptr %6 idxprom \l
+			%8 = load j \l
+			idxprom5 = sext %8 \l
+			arrayidx6 = getelementptr arrayidx 0 idxprom5 \l
+			br for.inc \l
+		}"
+	];
+	forbody3 -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%9 = load j \l
+			inc = add %9 1 \l
+			br for.cond1 \l
+		}"
+	];
+	forinc -> forcond1;
+	forend[shape=record,
+		label="{for.end:\l\l
+			br for.inc7 \l
+		}"
+	];
+	forend -> forinc7;
+	forinc7[shape=record,
+		label="{for.inc7:\l\l
+			%10 = load i \l
+			inc8 = add %10 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc7 -> forcond;
+	forend9[shape=record,
+		label="{for.end9:\l\l
+			ret \l
+		}"
+	];
+}

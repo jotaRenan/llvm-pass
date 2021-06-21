@@ -1,0 +1,101 @@
+digraph "CFG for 'Initarr' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			call Initrand \l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%2 = load i \l
+			cmp = icmp %2 5000 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			call = call Rand \l
+			conv = sext call \l
+			%3 = load temp \l
+			%4 = load temp \l
+			div = sdiv %4 100000 \l
+			mul = mul div 100000 \l
+			sub = sub %3 mul \l
+			sub1 = sub sub 50000 \l
+			conv2 = trunc sub1 \l
+			%5 = load i \l
+			idxprom = sext %5 \l
+			arrayidx = getelementptr sortlist 0 idxprom \l
+			%6 = load i \l
+			idxprom3 = sext %6 \l
+			arrayidx4 = getelementptr sortlist 0 idxprom3 \l
+			%7 = load arrayidx4 \l
+			%8 = load biggest \l
+			cmp5 = icmp %7 %8 \l
+			br cmp5 if.else if.then \l
+		}"
+	];
+	forbody -> ifthen;
+	forbody -> ifelse;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%9 = load i \l
+			idxprom7 = sext %9 \l
+			arrayidx8 = getelementptr sortlist 0 idxprom7 \l
+			%10 = load arrayidx8 \l
+			br if.end16 \l
+		}"
+	];
+	ifthen -> ifend16;
+	ifelse[shape=record,
+		label="{if.else:\l\l
+			%11 = load i \l
+			idxprom9 = sext %11 \l
+			arrayidx10 = getelementptr sortlist 0 idxprom9 \l
+			%12 = load arrayidx10 \l
+			%13 = load littlest \l
+			cmp11 = icmp %12 %13 \l
+			br cmp11 if.end if.then13 \l
+		}"
+	];
+	ifelse -> ifthen13;
+	ifelse -> ifend;
+	ifthen13[shape=record,
+		label="{if.then13:\l\l
+			%14 = load i \l
+			idxprom14 = sext %14 \l
+			arrayidx15 = getelementptr sortlist 0 idxprom14 \l
+			%15 = load arrayidx15 \l
+			br if.end \l
+		}"
+	];
+	ifthen13 -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br if.end16 \l
+		}"
+	];
+	ifend -> ifend16;
+	ifend16[shape=record,
+		label="{if.end16:\l\l
+			br for.inc \l
+		}"
+	];
+	ifend16 -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%16 = load i \l
+			inc = add %16 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			ret \l
+		}"
+	];
+}

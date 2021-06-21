@@ -1,0 +1,103 @@
+digraph "CFG for 'Mm' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			call Initrand \l
+			call rInitmatrix \l
+			call rInitmatrix \l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%25 = load i \l
+			cmp = icmp %25 40 \l
+			br cmp for.end8 for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend8;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			br for.cond1 \l
+		}"
+	];
+	forbody -> forcond1;
+	forcond1[shape=record,
+		label="{for.cond1:\l\l
+			%26 = load j \l
+			cmp2 = icmp %26 40 \l
+			br cmp2 for.end for.body3 \l
+		}"
+	];
+	forcond1 -> forbody3;
+	forcond1 -> forend;
+	forbody3[shape=record,
+		label="{for.body3:\l\l
+			%27 = load i \l
+			idxprom = sext %27 \l
+			arrayidx = getelementptr rmr 0 idxprom \l
+			%28 = load j \l
+			idxprom4 = sext %28 \l
+			arrayidx5 = getelementptr arrayidx 0 idxprom4 \l
+			%29 = load i \l
+			%30 = load j \l
+			call arrayidx5 %29 %30 rInnerproduct \l
+			br for.inc \l
+		}"
+	];
+	forbody3 -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%31 = load j \l
+			inc = add %31 1 \l
+			br for.cond1 \l
+		}"
+	];
+	forinc -> forcond1;
+	forend[shape=record,
+		label="{for.end:\l\l
+			br for.inc6 \l
+		}"
+	];
+	forend -> forinc6;
+	forinc6[shape=record,
+		label="{for.inc6:\l\l
+			%32 = load i \l
+			inc7 = add %32 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc6 -> forcond;
+	forend8[shape=record,
+		label="{for.end8:\l\l
+			%33 = load run.addr \l
+			cmp9 = icmp %33 40 \l
+			br cmp9 if.end if.then \l
+		}"
+	];
+	forend8 -> ifthen;
+	forend8 -> ifend;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%34 = load run.addr \l
+			add = add %34 1 \l
+			idxprom10 = sext add \l
+			arrayidx11 = getelementptr rmr 0 idxprom10 \l
+			%35 = load run.addr \l
+			add12 = add %35 1 \l
+			idxprom13 = sext add12 \l
+			arrayidx14 = getelementptr arrayidx11 0 idxprom13 \l
+			%36 = load arrayidx14 \l
+			conv = fpext %36 \l
+			call = call conv printf \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			ret \l
+		}"
+	];
+}

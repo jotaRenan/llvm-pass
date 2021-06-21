@@ -1,0 +1,13 @@
+digraph "CFG for 'Move' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%46 = load s1.addr \l
+			call = call %46 Pop \l
+			%47 = load s2.addr \l
+			call call %47 Push \l
+			%48 = load movesdone \l
+			add = add %48 1 \l
+			ret \l
+		}"
+	];
+}

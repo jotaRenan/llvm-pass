@@ -1,0 +1,72 @@
+digraph "CFG for 'Pop' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%29 = load s.addr \l
+			idxprom = sext %29 \l
+			arrayidx = getelementptr stack 0 idxprom \l
+			%30 = load arrayidx \l
+			cmp = icmp %30 0 \l
+			br cmp if.else if.then \l
+		}"
+	];
+	entry -> ifthen;
+	entry -> ifelse;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%31 = load s.addr \l
+			idxprom1 = sext %31 \l
+			arrayidx2 = getelementptr stack 0 idxprom1 \l
+			%32 = load arrayidx2 \l
+			idxprom3 = sext %32 \l
+			arrayidx4 = getelementptr cellspace 0 idxprom3 \l
+			discsize = getelementptr arrayidx4 0 0 \l
+			%33 = load discsize \l
+			%34 = load s.addr \l
+			idxprom5 = sext %34 \l
+			arrayidx6 = getelementptr stack 0 idxprom5 \l
+			%35 = load arrayidx6 \l
+			idxprom7 = sext %35 \l
+			arrayidx8 = getelementptr cellspace 0 idxprom7 \l
+			next = getelementptr arrayidx8 0 1 \l
+			%36 = load next \l
+			%37 = load freelist \l
+			%38 = load s.addr \l
+			idxprom9 = sext %38 \l
+			arrayidx10 = getelementptr stack 0 idxprom9 \l
+			%39 = load arrayidx10 \l
+			idxprom11 = sext %39 \l
+			arrayidx12 = getelementptr cellspace 0 idxprom11 \l
+			next13 = getelementptr arrayidx12 0 1 \l
+			%40 = load s.addr \l
+			idxprom14 = sext %40 \l
+			arrayidx15 = getelementptr stack 0 idxprom14 \l
+			%41 = load arrayidx15 \l
+			%42 = load temp \l
+			%43 = load s.addr \l
+			idxprom16 = sext %43 \l
+			arrayidx17 = getelementptr stack 0 idxprom16 \l
+			%44 = load temp1 \l
+			br return \l
+		}"
+	];
+	ifthen -> return;
+	ifelse[shape=record,
+		label="{if.else:\l\l
+			call Error \l
+			br if.end \l
+		}"
+	];
+	ifelse -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br return \l
+		}"
+	];
+	ifend -> return;
+	return[shape=record,
+		label="{return:\l\l
+			%45 = load retval \l
+			ret %45 \l
+		}"
+	];
+}

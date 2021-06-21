@@ -1,0 +1,7 @@
+digraph "CFG for 'Initrand' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			ret \l
+		}"
+	];
+}

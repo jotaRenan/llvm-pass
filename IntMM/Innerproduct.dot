@@ -1,0 +1,58 @@
+digraph "CFG for 'Innerproduct' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%11 = load result.addr \l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%12 = load i \l
+			cmp = icmp %12 40 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%13 = load result.addr \l
+			%14 = load %13 \l
+			%15 = load a.addr \l
+			%16 = load row.addr \l
+			idxprom = sext %16 \l
+			arrayidx = getelementptr %15 idxprom \l
+			%17 = load i \l
+			idxprom1 = sext %17 \l
+			arrayidx2 = getelementptr arrayidx 0 idxprom1 \l
+			%18 = load arrayidx2 \l
+			%19 = load b.addr \l
+			%20 = load i \l
+			idxprom3 = sext %20 \l
+			arrayidx4 = getelementptr %19 idxprom3 \l
+			%21 = load column.addr \l
+			idxprom5 = sext %21 \l
+			arrayidx6 = getelementptr arrayidx4 0 idxprom5 \l
+			%22 = load arrayidx6 \l
+			mul = mul %18 %22 \l
+			add = add %14 mul \l
+			%23 = load result.addr \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%24 = load i \l
+			inc = add %24 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			ret \l
+		}"
+	];
+}

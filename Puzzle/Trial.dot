@@ -1,0 +1,120 @@
+digraph "CFG for 'Trial' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%48 = load kount \l
+			add = add %48 1 \l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%49 = load i \l
+			cmp = icmp %49 12 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%50 = load i \l
+			idxprom = sext %50 \l
+			arrayidx = getelementptr class 0 idxprom \l
+			%51 = load arrayidx \l
+			idxprom1 = sext %51 \l
+			arrayidx2 = getelementptr piececount 0 idxprom1 \l
+			%52 = load arrayidx2 \l
+			cmp3 = icmp %52 0 \l
+			br cmp3 if.end11 if.then \l
+		}"
+	];
+	forbody -> ifthen;
+	forbody -> ifend11;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%53 = load i \l
+			%54 = load j.addr \l
+			call = call %53 %54 Fit \l
+			tobool = icmp call 0 \l
+			br tobool if.end10 if.then4 \l
+		}"
+	];
+	ifthen -> ifthen4;
+	ifthen -> ifend10;
+	ifthen4[shape=record,
+		label="{if.then4:\l\l
+			%55 = load i \l
+			%56 = load j.addr \l
+			call5 = call %55 %56 Place \l
+			%57 = load k \l
+			call6 = call %57 Trial \l
+			tobool7 = icmp call6 0 \l
+			br tobool7 lor.lhs.false if.then9 \l
+		}"
+	];
+	ifthen4 -> ifthen9;
+	ifthen4 -> lorlhsfalse;
+	lorlhsfalse[shape=record,
+		label="{lor.lhs.false:\l\l
+			%58 = load k \l
+			cmp8 = icmp %58 0 \l
+			br cmp8 if.else if.then9 \l
+		}"
+	];
+	lorlhsfalse -> ifthen9;
+	lorlhsfalse -> ifelse;
+	ifthen9[shape=record,
+		label="{if.then9:\l\l
+			br return \l
+		}"
+	];
+	ifthen9 -> return;
+	ifelse[shape=record,
+		label="{if.else:\l\l
+			%59 = load i \l
+			%60 = load j.addr \l
+			call %59 %60 Remove \l
+			br if.end \l
+		}"
+	];
+	ifelse -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br if.end10 \l
+		}"
+	];
+	ifend -> ifend10;
+	ifend10[shape=record,
+		label="{if.end10:\l\l
+			br if.end11 \l
+		}"
+	];
+	ifend10 -> ifend11;
+	ifend11[shape=record,
+		label="{if.end11:\l\l
+			br for.inc \l
+		}"
+	];
+	ifend11 -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%61 = load i \l
+			inc = add %61 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			br return \l
+		}"
+	];
+	forend -> return;
+	return[shape=record,
+		label="{return:\l\l
+			%62 = load retval \l
+			ret %62 \l
+		}"
+	];
+}

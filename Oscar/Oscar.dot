@@ -1,0 +1,90 @@
+digraph "CFG for 'Oscar' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			call 256 Exptab \l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%204 = load i \l
+			cmp = icmp %204 256 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%205 = load seed \l
+			conv = trunc %205 \l
+			call s zr Uniform11 \l
+			%206 = load s \l
+			conv1 = sext %206 \l
+			call s zi Uniform11 \l
+			%207 = load s \l
+			conv2 = sext %207 \l
+			%208 = load zr \l
+			mul = fmul %208 \l
+			sub = fsub mul \l
+			%209 = load i \l
+			idxprom = sext %209 \l
+			arrayidx = getelementptr z 0 idxprom \l
+			rp = getelementptr arrayidx 0 0 \l
+			%210 = load zi \l
+			mul3 = fmul %210 \l
+			sub4 = fsub mul3 \l
+			%211 = load i \l
+			idxprom5 = sext %211 \l
+			arrayidx6 = getelementptr z 0 idxprom5 \l
+			ip = getelementptr arrayidx6 0 1 \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%212 = load i \l
+			inc = add %212 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			br for.cond7 \l
+		}"
+	];
+	forend -> forcond7;
+	forcond7[shape=record,
+		label="{for.cond7:\l\l
+			%213 = load i \l
+			cmp8 = icmp %213 20 \l
+			br cmp8 for.end13 for.body10 \l
+		}"
+	];
+	forcond7 -> forbody10;
+	forcond7 -> forend13;
+	forbody10[shape=record,
+		label="{for.body10:\l\l
+			call 256 Fft \l
+			br for.inc11 \l
+		}"
+	];
+	forbody10 -> forinc11;
+	forinc11[shape=record,
+		label="{for.inc11:\l\l
+			%214 = load i \l
+			inc12 = add %214 1 \l
+			br for.cond7 \l
+		}"
+	];
+	forinc11 -> forcond7;
+	forend13[shape=record,
+		label="{for.end13:\l\l
+			call 1 256 17 Printcomplex \l
+			ret \l
+		}"
+	];
+}

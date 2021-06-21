@@ -1,0 +1,48 @@
+digraph "CFG for 'tower' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%49 = load k.addr \l
+			cmp = icmp %49 1 \l
+			br cmp if.else if.then \l
+		}"
+	];
+	entry -> ifthen;
+	entry -> ifelse;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%50 = load i.addr \l
+			%51 = load j.addr \l
+			call %50 %51 Move \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifelse[shape=record,
+		label="{if.else:\l\l
+			%52 = load i.addr \l
+			sub = sub 6 %52 \l
+			%53 = load j.addr \l
+			sub1 = sub sub %53 \l
+			%54 = load i.addr \l
+			%55 = load other \l
+			%56 = load k.addr \l
+			sub2 = sub %56 1 \l
+			call %54 %55 sub2 tower \l
+			%57 = load i.addr \l
+			%58 = load j.addr \l
+			call %57 %58 Move \l
+			%59 = load other \l
+			%60 = load j.addr \l
+			%61 = load k.addr \l
+			sub3 = sub %61 1 \l
+			call %59 %60 sub3 tower \l
+			br if.end \l
+		}"
+	];
+	ifelse -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			ret \l
+		}"
+	];
+}

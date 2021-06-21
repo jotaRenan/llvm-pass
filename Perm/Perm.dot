@@ -1,0 +1,56 @@
+digraph "CFG for 'Perm' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%24 = load i \l
+			cmp = icmp %24 5 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			call Initialize \l
+			call 7 Permute \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%25 = load i \l
+			inc = add %25 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			%26 = load pctr \l
+			cmp1 = icmp %26 43300 \l
+			br cmp1 if.end if.then \l
+		}"
+	];
+	forend -> ifthen;
+	forend -> ifend;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			call = call printf \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			%27 = load pctr \l
+			call2 = call %27 printf \l
+			ret \l
+		}"
+	];
+}

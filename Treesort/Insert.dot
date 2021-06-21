@@ -1,0 +1,113 @@
+digraph "CFG for 'Insert' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%26 = load n.addr \l
+			%27 = load t.addr \l
+			val = getelementptr %27 0 2 \l
+			%28 = load val \l
+			cmp = icmp %26 %28 \l
+			br cmp if.else5 if.then \l
+		}"
+	];
+	entry -> ifthen;
+	entry -> ifelse5;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%29 = load t.addr \l
+			left = getelementptr %29 0 0 \l
+			%30 = load left \l
+			cmp1 = icmp %30 \l
+			br cmp1 if.else if.then2 \l
+		}"
+	];
+	ifthen -> ifthen2;
+	ifthen -> ifelse;
+	ifthen2[shape=record,
+		label="{if.then2:\l\l
+			%31 = load t.addr \l
+			left3 = getelementptr %31 0 0 \l
+			%32 = load n.addr \l
+			call left3 %32 CreateNode \l
+			br if.end \l
+		}"
+	];
+	ifthen2 -> ifend;
+	ifelse[shape=record,
+		label="{if.else:\l\l
+			%33 = load n.addr \l
+			%34 = load t.addr \l
+			left4 = getelementptr %34 0 0 \l
+			%35 = load left4 \l
+			call %33 %35 Insert \l
+			br if.end \l
+		}"
+	];
+	ifelse -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br if.end16 \l
+		}"
+	];
+	ifend -> ifend16;
+	ifelse5[shape=record,
+		label="{if.else5:\l\l
+			%36 = load n.addr \l
+			%37 = load t.addr \l
+			val6 = getelementptr %37 0 2 \l
+			%38 = load val6 \l
+			cmp7 = icmp %36 %38 \l
+			br cmp7 if.end15 if.then8 \l
+		}"
+	];
+	ifelse5 -> ifthen8;
+	ifelse5 -> ifend15;
+	ifthen8[shape=record,
+		label="{if.then8:\l\l
+			%39 = load t.addr \l
+			right = getelementptr %39 0 1 \l
+			%40 = load right \l
+			cmp9 = icmp %40 \l
+			br cmp9 if.else12 if.then10 \l
+		}"
+	];
+	ifthen8 -> ifthen10;
+	ifthen8 -> ifelse12;
+	ifthen10[shape=record,
+		label="{if.then10:\l\l
+			%41 = load t.addr \l
+			right11 = getelementptr %41 0 1 \l
+			%42 = load n.addr \l
+			call right11 %42 CreateNode \l
+			br if.end14 \l
+		}"
+	];
+	ifthen10 -> ifend14;
+	ifelse12[shape=record,
+		label="{if.else12:\l\l
+			%43 = load n.addr \l
+			%44 = load t.addr \l
+			right13 = getelementptr %44 0 1 \l
+			%45 = load right13 \l
+			call %43 %45 Insert \l
+			br if.end14 \l
+		}"
+	];
+	ifelse12 -> ifend14;
+	ifend14[shape=record,
+		label="{if.end14:\l\l
+			br if.end15 \l
+		}"
+	];
+	ifend14 -> ifend15;
+	ifend15[shape=record,
+		label="{if.end15:\l\l
+			br if.end16 \l
+		}"
+	];
+	ifend15 -> ifend16;
+	ifend16[shape=record,
+		label="{if.end16:\l\l
+			ret \l
+		}"
+	];
+}

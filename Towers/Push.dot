@@ -1,0 +1,82 @@
+digraph "CFG for 'Push' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%9 = load s.addr \l
+			idxprom = sext %9 \l
+			arrayidx = getelementptr stack 0 idxprom \l
+			%10 = load arrayidx \l
+			cmp = icmp %10 0 \l
+			br cmp if.end7 if.then \l
+		}"
+	];
+	entry -> ifthen;
+	entry -> ifend7;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%11 = load s.addr \l
+			idxprom1 = sext %11 \l
+			arrayidx2 = getelementptr stack 0 idxprom1 \l
+			%12 = load arrayidx2 \l
+			idxprom3 = sext %12 \l
+			arrayidx4 = getelementptr cellspace 0 idxprom3 \l
+			discsize = getelementptr arrayidx4 0 0 \l
+			%13 = load discsize \l
+			%14 = load i.addr \l
+			cmp5 = icmp %13 %14 \l
+			br cmp5 if.end if.then6 \l
+		}"
+	];
+	ifthen -> ifthen6;
+	ifthen -> ifend;
+	ifthen6[shape=record,
+		label="{if.then6:\l\l
+			call Error \l
+			br if.end \l
+		}"
+	];
+	ifthen6 -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br if.end7 \l
+		}"
+	];
+	ifend -> ifend7;
+	ifend7[shape=record,
+		label="{if.end7:\l\l
+			%15 = load errorfound \l
+			tobool = icmp %15 0 \l
+			br tobool if.then8 if.end18 \l
+		}"
+	];
+	ifend7 -> ifend18;
+	ifend7 -> ifthen8;
+	ifthen8[shape=record,
+		label="{if.then8:\l\l
+			call = call Getelement \l
+			%16 = load s.addr \l
+			idxprom9 = sext %16 \l
+			arrayidx10 = getelementptr stack 0 idxprom9 \l
+			%17 = load arrayidx10 \l
+			%18 = load localel \l
+			idxprom11 = sext %18 \l
+			arrayidx12 = getelementptr cellspace 0 idxprom11 \l
+			next = getelementptr arrayidx12 0 1 \l
+			%19 = load localel \l
+			%20 = load s.addr \l
+			idxprom13 = sext %20 \l
+			arrayidx14 = getelementptr stack 0 idxprom13 \l
+			%21 = load i.addr \l
+			%22 = load localel \l
+			idxprom15 = sext %22 \l
+			arrayidx16 = getelementptr cellspace 0 idxprom15 \l
+			discsize17 = getelementptr arrayidx16 0 0 \l
+			br if.end18 \l
+		}"
+	];
+	ifthen8 -> ifend18;
+	ifend18[shape=record,
+		label="{if.end18:\l\l
+			ret \l
+		}"
+	];
+}

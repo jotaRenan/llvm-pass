@@ -1,0 +1,68 @@
+digraph "CFG for 'Printcomplex' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			call = call printf \l
+			%23 = load start.addr \l
+			br do.body \l
+		}"
+	];
+	entry -> dobody;
+	dobody[shape=record,
+		label="{do.body:\l\l
+			%24 = load zarray.addr \l
+			%25 = load i \l
+			idxprom = sext %25 \l
+			arrayidx = getelementptr %24 idxprom \l
+			rp = getelementptr arrayidx 0 0 \l
+			%26 = load rp \l
+			conv = fpext %26 \l
+			%27 = load zarray.addr \l
+			%28 = load i \l
+			idxprom1 = sext %28 \l
+			arrayidx2 = getelementptr %27 idxprom1 \l
+			ip = getelementptr arrayidx2 0 1 \l
+			%29 = load ip \l
+			conv3 = fpext %29 \l
+			call4 = call conv conv3 printf \l
+			%30 = load i \l
+			%31 = load increment.addr \l
+			add = add %30 %31 \l
+			%32 = load zarray.addr \l
+			%33 = load i \l
+			idxprom5 = sext %33 \l
+			arrayidx6 = getelementptr %32 idxprom5 \l
+			rp7 = getelementptr arrayidx6 0 0 \l
+			%34 = load rp7 \l
+			conv8 = fpext %34 \l
+			%35 = load zarray.addr \l
+			%36 = load i \l
+			idxprom9 = sext %36 \l
+			arrayidx10 = getelementptr %35 idxprom9 \l
+			ip11 = getelementptr arrayidx10 0 1 \l
+			%37 = load ip11 \l
+			conv12 = fpext %37 \l
+			call13 = call conv8 conv12 printf \l
+			call14 = call printf \l
+			%38 = load i \l
+			%39 = load increment.addr \l
+			add15 = add %38 %39 \l
+			br do.cond \l
+		}"
+	];
+	dobody -> docond;
+	docond[shape=record,
+		label="{do.cond:\l\l
+			%40 = load i \l
+			%41 = load finish.addr \l
+			cmp = icmp %40 %41 \l
+			br cmp do.end do.body \l
+		}"
+	];
+	docond -> dobody;
+	docond -> doend;
+	doend[shape=record,
+		label="{do.end:\l\l
+			ret \l
+		}"
+	];
+}

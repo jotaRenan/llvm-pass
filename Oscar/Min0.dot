@@ -1,0 +1,32 @@
+digraph "CFG for 'Min0' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%18 = load arg1.addr \l
+			%19 = load arg2.addr \l
+			cmp = icmp %18 %19 \l
+			br cmp if.else if.then \l
+		}"
+	];
+	entry -> ifthen;
+	entry -> ifelse;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%20 = load arg1.addr \l
+			br return \l
+		}"
+	];
+	ifthen -> return;
+	ifelse[shape=record,
+		label="{if.else:\l\l
+			%21 = load arg2.addr \l
+			br return \l
+		}"
+	];
+	ifelse -> return;
+	return[shape=record,
+		label="{return:\l\l
+			%22 = load retval \l
+			ret %22 \l
+		}"
+	];
+}

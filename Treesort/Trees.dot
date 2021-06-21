@@ -1,0 +1,75 @@
+digraph "CFG for 'Trees' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			call tInitarr \l
+			call = call 24 malloc \l
+			%69 = bitcast call \l
+			%70 = load tree \l
+			left = getelementptr %70 0 0 \l
+			%71 = load tree \l
+			right = getelementptr %71 0 1 \l
+			%72 = load \l
+			%73 = load tree \l
+			val = getelementptr %73 0 2 \l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%74 = load i \l
+			cmp = icmp %74 5000 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%75 = load i \l
+			idxprom = sext %75 \l
+			arrayidx = getelementptr sortlist 0 idxprom \l
+			%76 = load arrayidx \l
+			%77 = load tree \l
+			call %76 %77 Insert \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%78 = load i \l
+			inc = add %78 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			%79 = load run.addr \l
+			add = add 2 %79 \l
+			idxprom1 = sext add \l
+			arrayidx2 = getelementptr sortlist 0 idxprom1 \l
+			%80 = load arrayidx2 \l
+			call3 = call %80 printf \l
+			%81 = load tree \l
+			call4 = call %81 Checktree \l
+			tobool = icmp call4 0 \l
+			br tobool if.then if.end \l
+		}"
+	];
+	forend -> ifend;
+	forend -> ifthen;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			call5 = call printf \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			ret \l
+		}"
+	];
+}

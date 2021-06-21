@@ -1,0 +1,42 @@
+digraph "CFG for 'Quick' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			call Initarr \l
+			call 1 5000 Quicksort \l
+			%60 = load \l
+			%61 = load littlest \l
+			cmp = icmp %60 %61 \l
+			br cmp lor.lhs.false if.then \l
+		}"
+	];
+	entry -> ifthen;
+	entry -> lorlhsfalse;
+	lorlhsfalse[shape=record,
+		label="{lor.lhs.false:\l\l
+			%62 = load \l
+			%63 = load biggest \l
+			cmp1 = icmp %62 %63 \l
+			br cmp1 if.end if.then \l
+		}"
+	];
+	lorlhsfalse -> ifthen;
+	lorlhsfalse -> ifend;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			call = call printf \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			%64 = load run.addr \l
+			add = add %64 1 \l
+			idxprom = sext add \l
+			arrayidx = getelementptr sortlist 0 idxprom \l
+			%65 = load arrayidx \l
+			call2 = call %65 printf \l
+			ret \l
+		}"
+	];
+}

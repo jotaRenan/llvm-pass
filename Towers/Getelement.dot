@@ -1,0 +1,36 @@
+digraph "CFG for 'Getelement' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%4 = load freelist \l
+			cmp = icmp %4 0 \l
+			br cmp if.else if.then \l
+		}"
+	];
+	entry -> ifthen;
+	entry -> ifelse;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%5 = load freelist \l
+			%6 = load freelist \l
+			idxprom = sext %6 \l
+			arrayidx = getelementptr cellspace 0 idxprom \l
+			next = getelementptr arrayidx 0 1 \l
+			%7 = load next \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifelse[shape=record,
+		label="{if.else:\l\l
+			call Error \l
+			br if.end \l
+		}"
+	];
+	ifelse -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			%8 = load temp \l
+			ret %8 \l
+		}"
+	];
+}

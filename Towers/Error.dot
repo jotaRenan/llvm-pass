@@ -1,0 +1,9 @@
+digraph "CFG for 'Error' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%2 = load emsg.addr \l
+			call = call %2 printf \l
+			ret \l
+		}"
+	];
+}

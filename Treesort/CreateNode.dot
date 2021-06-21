@@ -1,0 +1,20 @@
+digraph "CFG for 'CreateNode' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			call = call 24 malloc \l
+			%17 = bitcast call \l
+			%18 = load t.addr \l
+			%19 = load t.addr \l
+			%20 = load %19 \l
+			left = getelementptr %20 0 0 \l
+			%21 = load t.addr \l
+			%22 = load %21 \l
+			right = getelementptr %22 0 1 \l
+			%23 = load n.addr \l
+			%24 = load t.addr \l
+			%25 = load %24 \l
+			val = getelementptr %25 0 2 \l
+			ret \l
+		}"
+	];
+}

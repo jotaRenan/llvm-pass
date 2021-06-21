@@ -1,0 +1,14 @@
+digraph "CFG for 'Swap' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%2 = load a.addr \l
+			%3 = load %2 \l
+			%4 = load b.addr \l
+			%5 = load %4 \l
+			%6 = load a.addr \l
+			%7 = load t \l
+			%8 = load b.addr \l
+			ret \l
+		}"
+	];
+}

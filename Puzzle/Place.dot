@@ -1,0 +1,136 @@
+digraph "CFG for 'Place' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%13 = load k \l
+			%14 = load i.addr \l
+			idxprom = sext %14 \l
+			arrayidx = getelementptr piecemax 0 idxprom \l
+			%15 = load arrayidx \l
+			cmp = icmp %13 %15 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%16 = load i.addr \l
+			idxprom1 = sext %16 \l
+			arrayidx2 = getelementptr p 0 idxprom1 \l
+			%17 = load k \l
+			idxprom3 = sext %17 \l
+			arrayidx4 = getelementptr arrayidx2 0 idxprom3 \l
+			%18 = load arrayidx4 \l
+			tobool = icmp %18 0 \l
+			br tobool if.end if.then \l
+		}"
+	];
+	forbody -> ifthen;
+	forbody -> ifend;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%19 = load j.addr \l
+			%20 = load k \l
+			add = add %19 %20 \l
+			idxprom5 = sext add \l
+			arrayidx6 = getelementptr puzzl 0 idxprom5 \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br for.inc \l
+		}"
+	];
+	ifend -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%21 = load k \l
+			inc = add %21 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			%22 = load i.addr \l
+			idxprom7 = sext %22 \l
+			arrayidx8 = getelementptr class 0 idxprom7 \l
+			%23 = load arrayidx8 \l
+			idxprom9 = sext %23 \l
+			arrayidx10 = getelementptr piececount 0 idxprom9 \l
+			%24 = load arrayidx10 \l
+			sub = sub %24 1 \l
+			%25 = load i.addr \l
+			idxprom11 = sext %25 \l
+			arrayidx12 = getelementptr class 0 idxprom11 \l
+			%26 = load arrayidx12 \l
+			idxprom13 = sext %26 \l
+			arrayidx14 = getelementptr piececount 0 idxprom13 \l
+			%27 = load j.addr \l
+			br for.cond15 \l
+		}"
+	];
+	forend -> forcond15;
+	forcond15[shape=record,
+		label="{for.cond15:\l\l
+			%28 = load k \l
+			cmp16 = icmp %28 511 \l
+			br cmp16 for.end25 for.body17 \l
+		}"
+	];
+	forcond15 -> forbody17;
+	forcond15 -> forend25;
+	forbody17[shape=record,
+		label="{for.body17:\l\l
+			%29 = load k \l
+			idxprom18 = sext %29 \l
+			arrayidx19 = getelementptr puzzl 0 idxprom18 \l
+			%30 = load arrayidx19 \l
+			tobool20 = icmp %30 0 \l
+			br tobool20 if.then21 if.end22 \l
+		}"
+	];
+	forbody17 -> ifend22;
+	forbody17 -> ifthen21;
+	ifthen21[shape=record,
+		label="{if.then21:\l\l
+			%31 = load k \l
+			br return \l
+		}"
+	];
+	ifthen21 -> return;
+	ifend22[shape=record,
+		label="{if.end22:\l\l
+			br for.inc23 \l
+		}"
+	];
+	ifend22 -> forinc23;
+	forinc23[shape=record,
+		label="{for.inc23:\l\l
+			%32 = load k \l
+			inc24 = add %32 1 \l
+			br for.cond15 \l
+		}"
+	];
+	forinc23 -> forcond15;
+	forend25[shape=record,
+		label="{for.end25:\l\l
+			br return \l
+		}"
+	];
+	forend25 -> return;
+	return[shape=record,
+		label="{return:\l\l
+			%33 = load retval \l
+			ret %33 \l
+		}"
+	];
+}

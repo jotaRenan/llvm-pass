@@ -1,0 +1,174 @@
+digraph "CFG for 'Quicksort' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%17 = load l.addr \l
+			%18 = load r.addr \l
+			%19 = load a.addr \l
+			%20 = load l.addr \l
+			%21 = load r.addr \l
+			add = add %20 %21 \l
+			div = sdiv add 2 \l
+			idxprom = sext div \l
+			arrayidx = getelementptr %19 idxprom \l
+			%22 = load arrayidx \l
+			br do.body \l
+		}"
+	];
+	entry -> dobody;
+	dobody[shape=record,
+		label="{do.body:\l\l
+			br while.cond \l
+		}"
+	];
+	dobody -> whilecond;
+	whilecond[shape=record,
+		label="{while.cond:\l\l
+			%23 = load a.addr \l
+			%24 = load i \l
+			idxprom1 = sext %24 \l
+			arrayidx2 = getelementptr %23 idxprom1 \l
+			%25 = load arrayidx2 \l
+			%26 = load x \l
+			cmp = icmp %25 %26 \l
+			br cmp while.end while.body \l
+		}"
+	];
+	whilecond -> whilebody;
+	whilecond -> whileend;
+	whilebody[shape=record,
+		label="{while.body:\l\l
+			%27 = load i \l
+			add3 = add %27 1 \l
+			br while.cond \l
+		}"
+	];
+	whilebody -> whilecond;
+	whileend[shape=record,
+		label="{while.end:\l\l
+			br while.cond4 \l
+		}"
+	];
+	whileend -> whilecond4;
+	whilecond4[shape=record,
+		label="{while.cond4:\l\l
+			%28 = load x \l
+			%29 = load a.addr \l
+			%30 = load j \l
+			idxprom5 = sext %30 \l
+			arrayidx6 = getelementptr %29 idxprom5 \l
+			%31 = load arrayidx6 \l
+			cmp7 = icmp %28 %31 \l
+			br cmp7 while.end9 while.body8 \l
+		}"
+	];
+	whilecond4 -> whilebody8;
+	whilecond4 -> whileend9;
+	whilebody8[shape=record,
+		label="{while.body8:\l\l
+			%32 = load j \l
+			sub = sub %32 1 \l
+			br while.cond4 \l
+		}"
+	];
+	whilebody8 -> whilecond4;
+	whileend9[shape=record,
+		label="{while.end9:\l\l
+			%33 = load i \l
+			%34 = load j \l
+			cmp10 = icmp %33 %34 \l
+			br cmp10 if.end if.then \l
+		}"
+	];
+	whileend9 -> ifthen;
+	whileend9 -> ifend;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%35 = load a.addr \l
+			%36 = load i \l
+			idxprom11 = sext %36 \l
+			arrayidx12 = getelementptr %35 idxprom11 \l
+			%37 = load arrayidx12 \l
+			%38 = load a.addr \l
+			%39 = load j \l
+			idxprom13 = sext %39 \l
+			arrayidx14 = getelementptr %38 idxprom13 \l
+			%40 = load arrayidx14 \l
+			%41 = load a.addr \l
+			%42 = load i \l
+			idxprom15 = sext %42 \l
+			arrayidx16 = getelementptr %41 idxprom15 \l
+			%43 = load w \l
+			%44 = load a.addr \l
+			%45 = load j \l
+			idxprom17 = sext %45 \l
+			arrayidx18 = getelementptr %44 idxprom17 \l
+			%46 = load i \l
+			add19 = add %46 1 \l
+			%47 = load j \l
+			sub20 = sub %47 1 \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br do.cond \l
+		}"
+	];
+	ifend -> docond;
+	docond[shape=record,
+		label="{do.cond:\l\l
+			%48 = load i \l
+			%49 = load j \l
+			cmp21 = icmp %48 %49 \l
+			br cmp21 do.end do.body \l
+		}"
+	];
+	docond -> dobody;
+	docond -> doend;
+	doend[shape=record,
+		label="{do.end:\l\l
+			%50 = load l.addr \l
+			%51 = load j \l
+			cmp22 = icmp %50 %51 \l
+			br cmp22 if.end24 if.then23 \l
+		}"
+	];
+	doend -> ifthen23;
+	doend -> ifend24;
+	ifthen23[shape=record,
+		label="{if.then23:\l\l
+			%52 = load a.addr \l
+			%53 = load l.addr \l
+			%54 = load j \l
+			call %52 %53 %54 Quicksort \l
+			br if.end24 \l
+		}"
+	];
+	ifthen23 -> ifend24;
+	ifend24[shape=record,
+		label="{if.end24:\l\l
+			%55 = load i \l
+			%56 = load r.addr \l
+			cmp25 = icmp %55 %56 \l
+			br cmp25 if.end27 if.then26 \l
+		}"
+	];
+	ifend24 -> ifthen26;
+	ifend24 -> ifend27;
+	ifthen26[shape=record,
+		label="{if.then26:\l\l
+			%57 = load a.addr \l
+			%58 = load i \l
+			%59 = load r.addr \l
+			call %57 %58 %59 Quicksort \l
+			br if.end27 \l
+		}"
+	];
+	ifthen26 -> ifend27;
+	ifend27[shape=record,
+		label="{if.end27:\l\l
+			ret \l
+		}"
+	];
+}

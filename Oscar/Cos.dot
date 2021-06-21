@@ -1,0 +1,94 @@
+digraph "CFG for 'Cos' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%2 = load x.addr \l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%3 = load i \l
+			cmp = icmp %3 10 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%4 = load factor \l
+			%5 = load i \l
+			mul = mul %4 %5 \l
+			%6 = load power \l
+			%7 = load x.addr \l
+			mul1 = fmul %6 %7 \l
+			%8 = load i \l
+			and = and %8 1 \l
+			cmp2 = icmp and 0 \l
+			br cmp2 if.end8 if.then \l
+		}"
+	];
+	forbody -> ifthen;
+	forbody -> ifend8;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%9 = load i \l
+			and3 = and %9 3 \l
+			cmp4 = icmp and3 0 \l
+			br cmp4 if.else if.then5 \l
+		}"
+	];
+	ifthen -> ifthen5;
+	ifthen -> ifelse;
+	ifthen5[shape=record,
+		label="{if.then5:\l\l
+			%10 = load result \l
+			%11 = load power \l
+			%12 = load factor \l
+			conv = sitofp %12 \l
+			div = fdiv %11 conv \l
+			add = fadd %10 div \l
+			br if.end \l
+		}"
+	];
+	ifthen5 -> ifend;
+	ifelse[shape=record,
+		label="{if.else:\l\l
+			%13 = load result \l
+			%14 = load power \l
+			%15 = load factor \l
+			conv6 = sitofp %15 \l
+			div7 = fdiv %14 conv6 \l
+			sub = fsub %13 div7 \l
+			br if.end \l
+		}"
+	];
+	ifelse -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br if.end8 \l
+		}"
+	];
+	ifend -> ifend8;
+	ifend8[shape=record,
+		label="{if.end8:\l\l
+			br for.inc \l
+		}"
+	];
+	ifend8 -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%16 = load i \l
+			inc = add %16 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			%17 = load result \l
+			ret %17 \l
+		}"
+	];
+}

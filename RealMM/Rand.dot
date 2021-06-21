@@ -1,0 +1,13 @@
+digraph "CFG for 'Rand' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%0 = load seed \l
+			mul = mul %0 1309 \l
+			add = add mul 13849 \l
+			and = and add 65535 \l
+			%1 = load seed \l
+			conv = trunc %1 \l
+			ret conv \l
+		}"
+	];
+}

@@ -1,0 +1,42 @@
+digraph "CFG for 'Init' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%23 = load s.addr \l
+			call %23 Makenull \l
+			%24 = load n.addr \l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%25 = load discctr \l
+			cmp = icmp %25 1 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%26 = load discctr \l
+			%27 = load s.addr \l
+			call %26 %27 Push \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%28 = load discctr \l
+			dec = add %28 4294967295 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			ret \l
+		}"
+	];
+}

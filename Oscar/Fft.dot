@@ -1,0 +1,329 @@
+digraph "CFG for 'Fft' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%100 = load n.addr \l
+			div = sdiv %100 2 \l
+			br do.body \l
+		}"
+	];
+	entry -> dobody;
+	dobody[shape=record,
+		label="{do.body:\l\l
+			%101 = load l \l
+			br do.body1 \l
+		}"
+	];
+	dobody -> dobody1;
+	dobody1[shape=record,
+		label="{do.body1:\l\l
+			br do.body2 \l
+		}"
+	];
+	dobody1 -> dobody2;
+	dobody2[shape=record,
+		label="{do.body2:\l\l
+			%102 = load z.addr \l
+			%103 = load i \l
+			idxprom = sext %103 \l
+			arrayidx = getelementptr %102 idxprom \l
+			rp = getelementptr arrayidx 0 0 \l
+			%104 = load rp \l
+			%105 = load z.addr \l
+			%106 = load m \l
+			%107 = load i \l
+			add = add %106 %107 \l
+			idxprom3 = sext add \l
+			arrayidx4 = getelementptr %105 idxprom3 \l
+			rp5 = getelementptr arrayidx4 0 0 \l
+			%108 = load rp5 \l
+			add6 = fadd %104 %108 \l
+			%109 = load w.addr \l
+			%110 = load i \l
+			%111 = load k \l
+			add7 = add %110 %111 \l
+			idxprom8 = sext add7 \l
+			arrayidx9 = getelementptr %109 idxprom8 \l
+			rp10 = getelementptr arrayidx9 0 0 \l
+			%112 = load z.addr \l
+			%113 = load i \l
+			idxprom11 = sext %113 \l
+			arrayidx12 = getelementptr %112 idxprom11 \l
+			ip = getelementptr arrayidx12 0 1 \l
+			%114 = load ip \l
+			%115 = load z.addr \l
+			%116 = load m \l
+			%117 = load i \l
+			add13 = add %116 %117 \l
+			idxprom14 = sext add13 \l
+			arrayidx15 = getelementptr %115 idxprom14 \l
+			ip16 = getelementptr arrayidx15 0 1 \l
+			%118 = load ip16 \l
+			add17 = fadd %114 %118 \l
+			%119 = load w.addr \l
+			%120 = load i \l
+			%121 = load k \l
+			add18 = add %120 %121 \l
+			idxprom19 = sext add18 \l
+			arrayidx20 = getelementptr %119 idxprom19 \l
+			ip21 = getelementptr arrayidx20 0 1 \l
+			%122 = load e.addr \l
+			%123 = load k \l
+			add22 = add %123 1 \l
+			idxprom23 = sext add22 \l
+			arrayidx24 = getelementptr %122 idxprom23 \l
+			rp25 = getelementptr arrayidx24 0 0 \l
+			%124 = load rp25 \l
+			%125 = load z.addr \l
+			%126 = load i \l
+			idxprom26 = sext %126 \l
+			arrayidx27 = getelementptr %125 idxprom26 \l
+			rp28 = getelementptr arrayidx27 0 0 \l
+			%127 = load rp28 \l
+			%128 = load z.addr \l
+			%129 = load i \l
+			%130 = load m \l
+			add29 = add %129 %130 \l
+			idxprom30 = sext add29 \l
+			arrayidx31 = getelementptr %128 idxprom30 \l
+			rp32 = getelementptr arrayidx31 0 0 \l
+			%131 = load rp32 \l
+			sub = fsub %127 %131 \l
+			mul = fmul %124 sub \l
+			%132 = load e.addr \l
+			%133 = load k \l
+			add33 = add %133 1 \l
+			idxprom34 = sext add33 \l
+			arrayidx35 = getelementptr %132 idxprom34 \l
+			ip36 = getelementptr arrayidx35 0 1 \l
+			%134 = load ip36 \l
+			%135 = load z.addr \l
+			%136 = load i \l
+			idxprom37 = sext %136 \l
+			arrayidx38 = getelementptr %135 idxprom37 \l
+			ip39 = getelementptr arrayidx38 0 1 \l
+			%137 = load ip39 \l
+			%138 = load z.addr \l
+			%139 = load i \l
+			%140 = load m \l
+			add40 = add %139 %140 \l
+			idxprom41 = sext add40 \l
+			arrayidx42 = getelementptr %138 idxprom41 \l
+			ip43 = getelementptr arrayidx42 0 1 \l
+			%141 = load ip43 \l
+			sub44 = fsub %137 %141 \l
+			mul45 = fmul %134 sub44 \l
+			sub46 = fsub mul mul45 \l
+			%142 = load w.addr \l
+			%143 = load i \l
+			%144 = load j \l
+			add47 = add %143 %144 \l
+			idxprom48 = sext add47 \l
+			arrayidx49 = getelementptr %142 idxprom48 \l
+			rp50 = getelementptr arrayidx49 0 0 \l
+			%145 = load e.addr \l
+			%146 = load k \l
+			add51 = add %146 1 \l
+			idxprom52 = sext add51 \l
+			arrayidx53 = getelementptr %145 idxprom52 \l
+			rp54 = getelementptr arrayidx53 0 0 \l
+			%147 = load rp54 \l
+			%148 = load z.addr \l
+			%149 = load i \l
+			idxprom55 = sext %149 \l
+			arrayidx56 = getelementptr %148 idxprom55 \l
+			ip57 = getelementptr arrayidx56 0 1 \l
+			%150 = load ip57 \l
+			%151 = load z.addr \l
+			%152 = load i \l
+			%153 = load m \l
+			add58 = add %152 %153 \l
+			idxprom59 = sext add58 \l
+			arrayidx60 = getelementptr %151 idxprom59 \l
+			ip61 = getelementptr arrayidx60 0 1 \l
+			%154 = load ip61 \l
+			sub62 = fsub %150 %154 \l
+			mul63 = fmul %147 sub62 \l
+			%155 = load e.addr \l
+			%156 = load k \l
+			add64 = add %156 1 \l
+			idxprom65 = sext add64 \l
+			arrayidx66 = getelementptr %155 idxprom65 \l
+			ip67 = getelementptr arrayidx66 0 1 \l
+			%157 = load ip67 \l
+			%158 = load z.addr \l
+			%159 = load i \l
+			idxprom68 = sext %159 \l
+			arrayidx69 = getelementptr %158 idxprom68 \l
+			rp70 = getelementptr arrayidx69 0 0 \l
+			%160 = load rp70 \l
+			%161 = load z.addr \l
+			%162 = load i \l
+			%163 = load m \l
+			add71 = add %162 %163 \l
+			idxprom72 = sext add71 \l
+			arrayidx73 = getelementptr %161 idxprom72 \l
+			rp74 = getelementptr arrayidx73 0 0 \l
+			%164 = load rp74 \l
+			sub75 = fsub %160 %164 \l
+			mul76 = fmul %157 sub75 \l
+			add77 = fadd mul63 mul76 \l
+			%165 = load w.addr \l
+			%166 = load i \l
+			%167 = load j \l
+			add78 = add %166 %167 \l
+			idxprom79 = sext add78 \l
+			arrayidx80 = getelementptr %165 idxprom79 \l
+			ip81 = getelementptr arrayidx80 0 1 \l
+			%168 = load i \l
+			add82 = add %168 1 \l
+			br do.cond \l
+		}"
+	];
+	dobody2 -> docond;
+	docond[shape=record,
+		label="{do.cond:\l\l
+			%169 = load i \l
+			%170 = load j \l
+			cmp = icmp %169 %170 \l
+			br cmp do.end do.body2 \l
+		}"
+	];
+	docond -> dobody2;
+	docond -> doend;
+	doend[shape=record,
+		label="{do.end:\l\l
+			%171 = load j \l
+			%172 = load k \l
+			%173 = load l \l
+			add83 = add %172 %173 \l
+			br do.cond84 \l
+		}"
+	];
+	doend -> docond84;
+	docond84[shape=record,
+		label="{do.cond84:\l\l
+			%174 = load j \l
+			%175 = load m \l
+			cmp85 = icmp %174 %175 \l
+			br cmp85 do.end86 do.body1 \l
+		}"
+	];
+	docond84 -> dobody1;
+	docond84 -> doend86;
+	doend86[shape=record,
+		label="{do.end86:\l\l
+			br do.body87 \l
+		}"
+	];
+	doend86 -> dobody87;
+	dobody87[shape=record,
+		label="{do.body87:\l\l
+			%176 = load z.addr \l
+			%177 = load index \l
+			idxprom88 = sext %177 \l
+			arrayidx89 = getelementptr %176 idxprom88 \l
+			%178 = load w.addr \l
+			%179 = load index \l
+			idxprom90 = sext %179 \l
+			arrayidx91 = getelementptr %178 idxprom90 \l
+			%180 = bitcast arrayidx89 \l
+			%181 = bitcast arrayidx91 \l
+			call %180 %181 8 0 llvm.memcpy.p0i8.p0i8.i64 \l
+			%182 = load index \l
+			add92 = add %182 1 \l
+			br do.cond93 \l
+		}"
+	];
+	dobody87 -> docond93;
+	docond93[shape=record,
+		label="{do.cond93:\l\l
+			%183 = load index \l
+			%184 = load n.addr \l
+			cmp94 = icmp %183 %184 \l
+			br cmp94 do.end95 do.body87 \l
+		}"
+	];
+	docond93 -> dobody87;
+	docond93 -> doend95;
+	doend95[shape=record,
+		label="{do.end95:\l\l
+			%185 = load l \l
+			%186 = load l \l
+			add96 = add %185 %186 \l
+			br do.cond97 \l
+		}"
+	];
+	doend95 -> docond97;
+	docond97[shape=record,
+		label="{do.cond97:\l\l
+			%187 = load l \l
+			%188 = load m \l
+			cmp98 = icmp %187 %188 \l
+			br cmp98 do.end99 do.body \l
+		}"
+	];
+	docond97 -> dobody;
+	docond97 -> doend99;
+	doend99[shape=record,
+		label="{do.end99:\l\l
+			br for.cond \l
+		}"
+	];
+	doend99 -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%189 = load i \l
+			%190 = load n.addr \l
+			cmp100 = icmp %189 %190 \l
+			br cmp100 for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%191 = load sqrinv.addr \l
+			%192 = load z.addr \l
+			%193 = load i \l
+			idxprom101 = sext %193 \l
+			arrayidx102 = getelementptr %192 idxprom101 \l
+			rp103 = getelementptr arrayidx102 0 0 \l
+			%194 = load rp103 \l
+			mul104 = fmul %191 %194 \l
+			%195 = load z.addr \l
+			%196 = load i \l
+			idxprom105 = sext %196 \l
+			arrayidx106 = getelementptr %195 idxprom105 \l
+			rp107 = getelementptr arrayidx106 0 0 \l
+			%197 = load sqrinv.addr \l
+			fneg = fneg %197 \l
+			%198 = load z.addr \l
+			%199 = load i \l
+			idxprom108 = sext %199 \l
+			arrayidx109 = getelementptr %198 idxprom108 \l
+			ip110 = getelementptr arrayidx109 0 1 \l
+			%200 = load ip110 \l
+			mul111 = fmul fneg %200 \l
+			%201 = load z.addr \l
+			%202 = load i \l
+			idxprom112 = sext %202 \l
+			arrayidx113 = getelementptr %201 idxprom112 \l
+			ip114 = getelementptr arrayidx113 0 1 \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%203 = load i \l
+			inc = add %203 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			ret \l
+		}"
+	];
+}

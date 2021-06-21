@@ -1,0 +1,75 @@
+digraph "CFG for 'Permute' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%13 = load pctr \l
+			add = add %13 1 \l
+			%14 = load n.addr \l
+			cmp = icmp %14 1 \l
+			br cmp if.end if.then \l
+		}"
+	];
+	entry -> ifthen;
+	entry -> ifend;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%15 = load n.addr \l
+			sub = sub %15 1 \l
+			call sub Permute \l
+			%16 = load n.addr \l
+			sub1 = sub %16 1 \l
+			br for.cond \l
+		}"
+	];
+	ifthen -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%17 = load k \l
+			cmp2 = icmp %17 1 \l
+			br cmp2 for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%18 = load n.addr \l
+			idxprom = sext %18 \l
+			arrayidx = getelementptr permarray 0 idxprom \l
+			%19 = load k \l
+			idxprom3 = sext %19 \l
+			arrayidx4 = getelementptr permarray 0 idxprom3 \l
+			call arrayidx arrayidx4 Swap \l
+			%20 = load n.addr \l
+			sub5 = sub %20 1 \l
+			call sub5 Permute \l
+			%21 = load n.addr \l
+			idxprom6 = sext %21 \l
+			arrayidx7 = getelementptr permarray 0 idxprom6 \l
+			%22 = load k \l
+			idxprom8 = sext %22 \l
+			arrayidx9 = getelementptr permarray 0 idxprom8 \l
+			call arrayidx7 arrayidx9 Swap \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%23 = load k \l
+			dec = add %23 4294967295 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			br if.end \l
+		}"
+	];
+	forend -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			ret \l
+		}"
+	];
+}

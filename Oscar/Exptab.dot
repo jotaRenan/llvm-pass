@@ -1,0 +1,195 @@
+digraph "CFG for 'Exptab' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%48 = load i \l
+			cmp = icmp %48 25 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%49 = load theta \l
+			%50 = load divisor \l
+			div = fdiv %49 %50 \l
+			call = call div Cos \l
+			mul = fmul call \l
+			div1 = fdiv mul \l
+			%51 = load i \l
+			idxprom = sext %51 \l
+			arrayidx = getelementptr h 0 idxprom \l
+			%52 = load divisor \l
+			%53 = load divisor \l
+			add = fadd %52 %53 \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%54 = load i \l
+			inc = add %54 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			%55 = load n.addr \l
+			div2 = sdiv %55 2 \l
+			%56 = load m \l
+			div3 = sdiv %56 2 \l
+			%57 = load e.addr \l
+			arrayidx4 = getelementptr %57 1 \l
+			rp = getelementptr arrayidx4 0 0 \l
+			%58 = load e.addr \l
+			arrayidx5 = getelementptr %58 1 \l
+			ip = getelementptr arrayidx5 0 1 \l
+			%59 = load e.addr \l
+			%60 = load l \l
+			add6 = add %60 1 \l
+			idxprom7 = sext add6 \l
+			arrayidx8 = getelementptr %59 idxprom7 \l
+			rp9 = getelementptr arrayidx8 0 0 \l
+			%61 = load e.addr \l
+			%62 = load l \l
+			add10 = add %62 1 \l
+			idxprom11 = sext add10 \l
+			arrayidx12 = getelementptr %61 idxprom11 \l
+			ip13 = getelementptr arrayidx12 0 1 \l
+			%63 = load e.addr \l
+			%64 = load m \l
+			add14 = add %64 1 \l
+			idxprom15 = sext add14 \l
+			arrayidx16 = getelementptr %63 idxprom15 \l
+			rp17 = getelementptr arrayidx16 0 0 \l
+			%65 = load e.addr \l
+			%66 = load m \l
+			add18 = add %66 1 \l
+			idxprom19 = sext add18 \l
+			arrayidx20 = getelementptr %65 idxprom19 \l
+			ip21 = getelementptr arrayidx20 0 1 \l
+			br do.body \l
+		}"
+	];
+	forend -> dobody;
+	dobody[shape=record,
+		label="{do.body:\l\l
+			%67 = load l \l
+			div22 = sdiv %67 2 \l
+			%68 = load i \l
+			br do.body23 \l
+		}"
+	];
+	dobody -> dobody23;
+	dobody23[shape=record,
+		label="{do.body23:\l\l
+			%69 = load j \l
+			idxprom24 = sext %69 \l
+			arrayidx25 = getelementptr h 0 idxprom24 \l
+			%70 = load arrayidx25 \l
+			%71 = load e.addr \l
+			%72 = load k \l
+			%73 = load i \l
+			add26 = add %72 %73 \l
+			add27 = add add26 1 \l
+			idxprom28 = sext add27 \l
+			arrayidx29 = getelementptr %71 idxprom28 \l
+			rp30 = getelementptr arrayidx29 0 0 \l
+			%74 = load rp30 \l
+			%75 = load e.addr \l
+			%76 = load k \l
+			%77 = load i \l
+			sub = sub %76 %77 \l
+			add31 = add sub 1 \l
+			idxprom32 = sext add31 \l
+			arrayidx33 = getelementptr %75 idxprom32 \l
+			rp34 = getelementptr arrayidx33 0 0 \l
+			%78 = load rp34 \l
+			add35 = fadd %74 %78 \l
+			mul36 = fmul %70 add35 \l
+			%79 = load e.addr \l
+			%80 = load k \l
+			add37 = add %80 1 \l
+			idxprom38 = sext add37 \l
+			arrayidx39 = getelementptr %79 idxprom38 \l
+			rp40 = getelementptr arrayidx39 0 0 \l
+			%81 = load j \l
+			idxprom41 = sext %81 \l
+			arrayidx42 = getelementptr h 0 idxprom41 \l
+			%82 = load arrayidx42 \l
+			%83 = load e.addr \l
+			%84 = load k \l
+			%85 = load i \l
+			add43 = add %84 %85 \l
+			add44 = add add43 1 \l
+			idxprom45 = sext add44 \l
+			arrayidx46 = getelementptr %83 idxprom45 \l
+			ip47 = getelementptr arrayidx46 0 1 \l
+			%86 = load ip47 \l
+			%87 = load e.addr \l
+			%88 = load k \l
+			%89 = load i \l
+			sub48 = sub %88 %89 \l
+			add49 = add sub48 1 \l
+			idxprom50 = sext add49 \l
+			arrayidx51 = getelementptr %87 idxprom50 \l
+			ip52 = getelementptr arrayidx51 0 1 \l
+			%90 = load ip52 \l
+			add53 = fadd %86 %90 \l
+			mul54 = fmul %82 add53 \l
+			%91 = load e.addr \l
+			%92 = load k \l
+			add55 = add %92 1 \l
+			idxprom56 = sext add55 \l
+			arrayidx57 = getelementptr %91 idxprom56 \l
+			ip58 = getelementptr arrayidx57 0 1 \l
+			%93 = load k \l
+			%94 = load l \l
+			add59 = add %93 %94 \l
+			br do.cond \l
+		}"
+	];
+	dobody23 -> docond;
+	docond[shape=record,
+		label="{do.cond:\l\l
+			%95 = load k \l
+			%96 = load m \l
+			cmp60 = icmp %95 %96 \l
+			br cmp60 do.end do.body23 \l
+		}"
+	];
+	docond -> dobody23;
+	docond -> doend;
+	doend[shape=record,
+		label="{do.end:\l\l
+			%97 = load j \l
+			add61 = add %97 1 \l
+			call62 = call add61 25 Min0 \l
+			%98 = load i \l
+			br do.cond63 \l
+		}"
+	];
+	doend -> docond63;
+	docond63[shape=record,
+		label="{do.cond63:\l\l
+			%99 = load l \l
+			cmp64 = icmp %99 1 \l
+			br cmp64 do.end65 do.body \l
+		}"
+	];
+	docond63 -> dobody;
+	docond63 -> doend65;
+	doend65[shape=record,
+		label="{do.end65:\l\l
+			ret \l
+		}"
+	];
+}

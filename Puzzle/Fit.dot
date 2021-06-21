@@ -1,0 +1,88 @@
+digraph "CFG for 'Fit' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%2 = load k \l
+			%3 = load i.addr \l
+			idxprom = sext %3 \l
+			arrayidx = getelementptr piecemax 0 idxprom \l
+			%4 = load arrayidx \l
+			cmp = icmp %2 %4 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%5 = load i.addr \l
+			idxprom1 = sext %5 \l
+			arrayidx2 = getelementptr p 0 idxprom1 \l
+			%6 = load k \l
+			idxprom3 = sext %6 \l
+			arrayidx4 = getelementptr arrayidx2 0 idxprom3 \l
+			%7 = load arrayidx4 \l
+			tobool = icmp %7 0 \l
+			br tobool if.end9 if.then \l
+		}"
+	];
+	forbody -> ifthen;
+	forbody -> ifend9;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			%8 = load j.addr \l
+			%9 = load k \l
+			add = add %8 %9 \l
+			idxprom5 = sext add \l
+			arrayidx6 = getelementptr puzzl 0 idxprom5 \l
+			%10 = load arrayidx6 \l
+			tobool7 = icmp %10 0 \l
+			br tobool7 if.end if.then8 \l
+		}"
+	];
+	ifthen -> ifthen8;
+	ifthen -> ifend;
+	ifthen8[shape=record,
+		label="{if.then8:\l\l
+			br return \l
+		}"
+	];
+	ifthen8 -> return;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			br if.end9 \l
+		}"
+	];
+	ifend -> ifend9;
+	ifend9[shape=record,
+		label="{if.end9:\l\l
+			br for.inc \l
+		}"
+	];
+	ifend9 -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%11 = load k \l
+			inc = add %11 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			br return \l
+		}"
+	];
+	forend -> return;
+	return[shape=record,
+		label="{return:\l\l
+			%12 = load retval \l
+			ret %12 \l
+		}"
+	];
+}

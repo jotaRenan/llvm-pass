@@ -1,0 +1,64 @@
+digraph "CFG for 'Towers' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			br for.cond \l
+		}"
+	];
+	entry -> forcond;
+	forcond[shape=record,
+		label="{for.cond:\l\l
+			%62 = load i \l
+			cmp = icmp %62 18 \l
+			br cmp for.end for.body \l
+		}"
+	];
+	forcond -> forbody;
+	forcond -> forend;
+	forbody[shape=record,
+		label="{for.body:\l\l
+			%63 = load i \l
+			sub = sub %63 1 \l
+			%64 = load i \l
+			idxprom = sext %64 \l
+			arrayidx = getelementptr cellspace 0 idxprom \l
+			next = getelementptr arrayidx 0 1 \l
+			br for.inc \l
+		}"
+	];
+	forbody -> forinc;
+	forinc[shape=record,
+		label="{for.inc:\l\l
+			%65 = load i \l
+			inc = add %65 1 \l
+			br for.cond \l
+		}"
+	];
+	forinc -> forcond;
+	forend[shape=record,
+		label="{for.end:\l\l
+			call 1 14 Init \l
+			call 2 Makenull \l
+			call 3 Makenull \l
+			call 1 2 14 tower \l
+			%66 = load movesdone \l
+			cmp1 = icmp %66 16383 \l
+			br cmp1 if.end if.then \l
+		}"
+	];
+	forend -> ifthen;
+	forend -> ifend;
+	ifthen[shape=record,
+		label="{if.then:\l\l
+			call = call printf \l
+			br if.end \l
+		}"
+	];
+	ifthen -> ifend;
+	ifend[shape=record,
+		label="{if.end:\l\l
+			%67 = load movesdone \l
+			call2 = call %67 printf \l
+			ret \l
+		}"
+	];
+}

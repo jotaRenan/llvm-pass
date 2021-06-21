@@ -1,0 +1,10 @@
+digraph "CFG for 'Makenull' function" {
+	entry[shape=record,
+		label="{entry:\l\l
+			%3 = load s.addr \l
+			idxprom = sext %3 \l
+			arrayidx = getelementptr stack 0 idxprom \l
+			ret \l
+		}"
+	];
+}
